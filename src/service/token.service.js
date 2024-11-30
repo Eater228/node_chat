@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-return */
-import { Token } from '../moduls/Token.js';
+import { Token } from '../modules/Token.js';
 
 async function save(userId, newToken) {
   const token = await Token.findOne({ where: { userId } });

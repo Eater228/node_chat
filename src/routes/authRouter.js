@@ -1,5 +1,5 @@
 import express from 'express';
-import { catchError } from '../untils/CatchErorr.js';
+import { catchError } from '../utils/CatchErorr.js';
 import { authController } from '../controllers/auth.controller.js';
 
 export const authRouter = new express.Router();

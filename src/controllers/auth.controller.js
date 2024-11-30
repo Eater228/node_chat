@@ -1,8 +1,8 @@
-import { ApiError } from '../exeptions/api.error.js';
-import { User } from '../moduls/User.js';
+import { ApiError } from '../exceptions/api.error.js';
+import { User } from '../modules/User.js';
 import { userService } from '../service/user.service.js';
 import bcrypt from 'bcrypt';
-import { Console } from '../untils/Console.js';
+import { Console } from '../utils/Console.js';
 import { jwtService } from '../service/jwt.service.js';
 import { tokenService } from '../service/token.service.js';
 

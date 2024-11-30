@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
-import { Console } from '../untils/Console.js';
+import { Console } from '../utils/Console.js';
 
 function sign(user) {
   const token = jwt.sign(user, process.env.JWT_KEY, {

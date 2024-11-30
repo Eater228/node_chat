@@ -14,7 +14,7 @@ export class ApiError extends Error {
     });
   }
 
-  static unauthorize(errors) {
+  static unauthorize(errors = {}) {
     return new ApiError({
       message: 'unauthorized user',
       errors,

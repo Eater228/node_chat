@@ -1,4 +1,4 @@
-import { ApiError } from '../exeptions/api.error.js';
+import { ApiError } from '../exceptions/api.error.js';
 import { chatService } from '../service/chat.service.js';
 import { EventEmitter } from 'events';
 import { wss } from '../index.js';
@@ -23,24 +23,26 @@ const messages = async (req, res) => {
   const { text } = req.body;
   const { roomId } = req.params;
 
-  const refreshToken = req.headers.cookie.split('=')[1];
+  const refreshToken = req.headers.cookie;
 
   if (!refreshToken) {
     throw ApiError.badRequest('Refresh token not found');
   }
 
-  const author = await chatService.getUser(refreshToken);
+  const cookieToken = refreshToken.split('=')[1];
+
+  const author = await chatService.getUser(cookieToken);
 
   if (!author) {
     throw ApiError.badRequest('User not found');
   }
 
   if (!text) {
-    throw ApiError.badRequest('Not have text');
+    throw ApiError.badRequest('Text is missing');
   }
 
   if (!roomId) {
-    throw ApiError.badRequest('Not id room');
+    throw ApiError.badRequest('Room ID is missing');
   }
 
   const messageSend = await chatService.sendMessages(text, roomId, author);
@@ -76,7 +78,7 @@ const getAllMessages = async (req, res) => {
   const { roomId } = req.params;
 
   if (!roomId) {
-    throw ApiError.badRequest('Not id room');
+    throw ApiError.badRequest('Room ID is missing');
   }
 
   const allMessages = await chatService.getAll(roomId);
@@ -94,7 +96,7 @@ const remove = async (req, res) => {
   const { roomId } = req.params;
 
   if (!roomId) {
-    throw ApiError.badRequest('Not found Room');
+    throw ApiError.badRequest('Room not found');
   }
 
   await chatService.removeRoom(roomId);

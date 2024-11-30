@@ -2,7 +2,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import { Console } from './untils/Console.js';
+import { Console } from './utils/Console.js';
 import { authRouter } from './routes/authRouter.js';
 import cookieParser from 'cookie-parser';
 import { chatRouter } from './routes/chatRouter.js';
@@ -31,7 +31,7 @@ app.use('/auth', authRouter);
 app.use('/chat', chatRouter);
 
 const server = app.listen(PORT, () => {
-  Console.log(`Server is runing ${PORT}`);
+  Console.log(`Server is running ${PORT}`);
 });
 
 export const wss = new WebSocketServer({ server });

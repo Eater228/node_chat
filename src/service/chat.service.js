@@ -1,16 +1,16 @@
 /* eslint-disable no-return-await */
-import { ApiError } from '../exeptions/api.error.js';
-import { Messages } from '../moduls/Messages.js';
-import { Room } from '../moduls/Room.js';
-import { Token } from '../moduls/Token.js';
-import { User } from '../moduls/User.js';
-import { Console } from '../untils/Console.js';
+import { ApiError } from '../exceptions/api.error.js';
+import { Messages } from '../modules/Messages.js';
+import { Room } from '../modules/Room.js';
+import { Token } from '../modules/Token.js';
+import { User } from '../modules/User.js';
+import { Console } from '../utils/Console.js';
 
 async function createRoom(name) {
   const exitRoom = await Room.findOne({ where: { name } });
 
   if (exitRoom) {
-    throw ApiError.badRequest('room already exit');
+    throw ApiError.badRequest('Room already exists');
   }
 
   const room = await Room.create({ name });
@@ -55,7 +55,7 @@ async function getAll(roomId) {
   });
 
   if (!allMessages) {
-    return ['Messegaes empty'];
+    return ['Messages empty'];
   }
 
   return allMessages;

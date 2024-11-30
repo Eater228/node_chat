@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { client } from '../untils/db.js';
+import { client } from '../utils/db.js';
 
 export const User = client.define('users', {
   email: {

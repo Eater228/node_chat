@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { client } from '../untils/db.js';
+import { client } from '../utils/db.js';
 import { Room } from './Room.js';
 
 export const Messages = client.define('messages', {

@@ -1,6 +1,6 @@
-import { ApiError } from '../exeptions/api.error.js';
-import { User } from '../moduls/User.js';
-import { Console } from '../untils/Console.js';
+import { ApiError } from '../exceptions/api.error.js';
+import { User } from '../modules/User.js';
+import { Console } from '../utils/Console.js';
 
 function validateEmail(value) {
   const EMAIL_PATTERN = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/;

@@ -1,5 +1,5 @@
 import express from 'express';
-import { catchError } from '../untils/CatchErorr.js';
+import { catchError } from '../utils/CatchErorr.js';
 import { chatController } from '../controllers/chatController.js';
 
 export const chatRouter = new express.Router();
