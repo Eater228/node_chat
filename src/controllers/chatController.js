@@ -1,6 +1,7 @@
 import { ApiError } from '../exeptions/api.error.js';
 import { chatService } from '../service/chat.service.js';
 import { EventEmitter } from 'events';
+import { wss } from '../index.js';
 
 const emitter = new EventEmitter();
 
@@ -44,7 +45,11 @@ const messages = async (req, res) => {
 
   const messageSend = await chatService.sendMessages(text, roomId, author);
 
-  emitter.emit('messages', JSON.stringify(messageSend));
+  // emitter.emit('messages', JSON.stringify(messageSend));
+
+  for (const client of wss.clients) {
+    client.send(JSON.stringify(messageSend));
+  }
 
   const allMessages = await chatService.getAll(roomId);
 
@@ -52,19 +57,6 @@ const messages = async (req, res) => {
 };
 
 const getMessage = async (req, res) => {
-  // res.setHeader('Content-Type', 'text/event-stream');
-  // res.setHeader('Connection', 'keep-alive');
-  // res.setHeader('Cache-COntrole', 'no-store');
-
-  // const cb = (message) => {
-  //   res.write(`data: ${JSON.stringify(message)}\n\n`);
-  // };
-
-  // emitter.on('message', cb);
-
-  // res.on('close', () => {
-  //   emitter.off('message', cb);
-  // });
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Connection', 'keep-alive');
   res.setHeader('Cache-Controle', 'no-store');

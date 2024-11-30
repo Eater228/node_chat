@@ -6,6 +6,7 @@ import { Console } from './untils/Console.js';
 import { authRouter } from './routes/authRouter.js';
 import cookieParser from 'cookie-parser';
 import { chatRouter } from './routes/chatRouter.js';
+import { WebSocketServer } from 'ws';
 // import { EventEmitter } from 'events';
 // import { chatService } from './service/chat.service.js';
 
@@ -29,25 +30,30 @@ app.get('/', (req, res) => {
 app.use('/auth', authRouter);
 app.use('/chat', chatRouter);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   Console.log(`Server is runing ${PORT}`);
 });
 
-// const wss = new WebSocketServer({ server });
+export const wss = new WebSocketServer({ server });
 
 // wss.on('connection', (connection) => {
 //   connection.on('message', async (text) => {
 //     await chatService.sendMessages(text);
 
-//     emitter.emit('message', message);
+// console.log('test')
+
+//     emitter.emit('message', text);
 //   });
 // });
 
-// emitter.on('message', (message) => {
+// wss.on('message', (message) => {
 //   for (const client of wss.clients) {
+
+//     console.log(client);
+
 //     client.send(JSON.stringify(message));
 //   }
-// })
+// });
 
 // app.post('/messages', (req, res) => {
 //   const { text } = req.body;
